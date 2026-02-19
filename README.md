@@ -1,4 +1,4 @@
-# Splunk Active Directory Attack Homelab
+# Splunk Active Directory Attack Homelab (IN PROGRESS)
 Home lab for practicing Active Directory security monitoring and attack detection using Splunk SIEM. Built with Oracle VirtualBox VMs for log ingestion and analysis.
 
 This project demonstrates:
@@ -25,12 +25,12 @@ Network: Internal network (192.168.50.0/24)
 
 | Machine | OS | IP Address | Role |
 |---------|-----|------------|------|
-| Splunk Server | Ubuntu Server | 192.168.50.10 | SIEM / Log aggregation |
-| Active Directory | Windows Server 2022 | 192.168.50.7 | Domain Controller |
-| Target-PC | Windows 10 | DHCP | Domain-joined endpoint |
-| Attacker | Kali Linux | 192.168.50.200 | Attack simulation |
+| Splunk Server | Ubuntu Server | 192.168.100.10 | SIEM / SOAR |
+| Active Directory | Windows Server 2022 | 192.168.100.7 | Domain Controller |
+| Target-PC | Windows 10 | 192.168.100.3 | Target machine |
+| Attacker | Kali Linux | 192.168.100.200 | Attack machine |
 
-<img width="545" height="542" alt="image" src="https://github.com/user-attachments/assets/4a966f21-7b49-4fa4-aeb2-7132e4d8f882" />
+<img width="681" height="656" alt="image" src="https://github.com/user-attachments/assets/65f4f6e6-de98-41de-9f42-ade3008f3797" />
 
 ### Oracle VirtualBox
 
@@ -127,3 +127,7 @@ The NAT Network adapter enables internet connectivity and inter-VM communication
 #### Sysmon
 
 Sysmon (System Monitor) provides detailed, persistent telemetry (or logging) of system activity to the Windows event log via detecting malicious activity, monitoring unauthorized changes to critical files, and analyzing network connections or process creation. 
+
+#### Atomic Red Team
+
+Atomic red team is a PowerShell-based execution framework built around the MITRE ATT&CK framework. It provides a library of simple tests that generate real, detectable malicious telemetry on the target machine.
