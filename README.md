@@ -11,6 +11,10 @@ This project demonstrates:
 
 ## Table of Contents 
 1. [Initial Setup](#initial-setup-anchor-point)
+   * [Windows 10](#windows-10-anchor-point)
+   * [Kali Linux](#kali-linux-anchor-point)
+   * [Active Directory Domain Controller](#active-directory-domain-controller-anchor-point)
+   * [Splunk Server](#splunk-server-anchor-point)
 
 ---
 
@@ -30,7 +34,7 @@ Network: Internal network (192.168.50.0/24)
 | Target-PC | Windows 10 | 192.168.100.3 | Target machine |
 | Attacker | Kali Linux | 192.168.100.200 | Attack machine |
 
-<img width="681" height="656" alt="image" src="https://github.com/user-attachments/assets/65f4f6e6-de98-41de-9f42-ade3008f3797" />
+<img width="681" height="656" alt="Project architecture" src="https://github.com/user-attachments/assets/65f4f6e6-de98-41de-9f42-ade3008f3797" />
 
 ### Oracle VirtualBox
 
@@ -40,7 +44,10 @@ Oracle VirtualBox is a free, open-source hypervisor that allows for running mult
 2. Run the installer and follow the installation wizard with default settings
 3. Verify installation by opening VirtualBox Manager
 
-### Windows 10 Target Machine
+#
+
+<a name="windows-10-anchor-point"></a>
+### Windows 10
 
 #### Download Windows 10 ISO
 
@@ -73,7 +80,7 @@ The Windows 10 machine will serve as our target endpoint representing a typical 
 
 #### Install Windows 10
 
-1. In Oracle VirtualBox Manager, select and start **Windows 10 Splunk Forwarder** virtual machine
+1. In Oracle VirtualBox Manager, select and start the Windows 10 VM
 2. The Windows installation screen will begin automatically. Configure Windows setup:
 
   <img width="957" height="857" alt="Windows setup" src="https://github.com/user-attachments/assets/eebf25d0-4bcd-4baa-a7c9-c167947ae030" />
@@ -102,23 +109,23 @@ The NAT Network adapter enables internet connectivity and inter-VM communication
 
 1. In **Oracle VirtualBox Manager**, navigate to **File > Tools > Network**
 
-<img width="415" height="741" alt="image" src="https://github.com/user-attachments/assets/bdc5f6d8-c06e-4691-93b6-c03a6ea86226" />
+<img width="415" height="741" alt="Path to network tab" src="https://github.com/user-attachments/assets/bdc5f6d8-c06e-4691-93b6-c03a6ea86226" />
 
 2. Select **NAT Networks > Create**
    * Name the network to **SplunkNetwork**
    * Set IPv4 range to **192.168.100.0/24**
    * Click **Apply**
 
-<img width="924" height="746" alt="image" src="https://github.com/user-attachments/assets/f3ad2f4f-4cbf-4d7c-be0c-44e785826810" />
+<img width="924" height="746" alt="Create NAT Network" src="https://github.com/user-attachments/assets/f3ad2f4f-4cbf-4d7c-be0c-44e785826810" />
 
-3. Open settings for the **Windows 10 Splunk Forwarder** VM
+3. Open **Settings** for the Windows 10 VM
 
-<img width="927" height="740" alt="image" src="https://github.com/user-attachments/assets/692c4133-7eb4-41d9-9a52-c26d4e1f8e14" />
+<img width="927" height="740" alt="Open Windows 10 settings" src="https://github.com/user-attachments/assets/692c4133-7eb4-41d9-9a52-c26d4e1f8e14" />
 
-4. Navigate to **Network** and set **Attached to: NAT Network**
-5. Select **SplunkNetwork**
+4. Navigate to **Network** and set **Attached to** to **NAT Network**
+5. Select **SplunkNetwork** from the dropdown
 
-<img width="773" height="510" alt="image" src="https://github.com/user-attachments/assets/72eeac86-8061-4e4d-a396-4c11d0b87b14" />
+<img width="773" height="510" alt="Enable NAT Network for Windows 10 machine" src="https://github.com/user-attachments/assets/72eeac86-8061-4e4d-a396-4c11d0b87b14" />
 
 6. Click **OK**
 
@@ -131,3 +138,72 @@ Sysmon (System Monitor) provides detailed, persistent telemetry (or logging) of 
 #### Atomic Red Team
 
 Atomic red team is a PowerShell-based execution framework built around the MITRE ATT&CK framework. It provides a library of simple tests that generate real, detectable malicious telemetry on the target machine.
+
+#
+
+<a name="kali-linux-anchor-point"></a>
+### Kali Linux
+
+#### Download and Install Kali Linux
+
+The Kali Linux machine will serve as our attacker, representing a threat actor within the security environment. This machine will generate malicious telemetry to the Active Directory domain and target Windows machine that we can detect and analyze in Splunk.
+
+1. <a href="https://www.kali.org/get-kali/#kali-virtual-machines" target="_blank">Download Kali Linux ISO</a>
+<img width="966" height="678" alt="Kali Linux Download Page" src="https://github.com/user-attachments/assets/d1d13ae5-8b60-4b9a-a53b-a37b2de5dc8b" />
+
+> **Note:** The default credentials for this machine are **kali/kali**
+
+2. Extract using <a href="https://www.7-zip.org/" target="_blank">7-zip</a>
+<img width="587" height="387" alt="Extract Kali Linux folder with 7-zip" src="https://github.com/user-attachments/assets/a56655e5-a136-48fa-9f8c-38944a5fa281" />
+
+3. Open Kali Linux `.vbox` file using **Oracle VirtualBox**
+
+<img width="840" height="621" alt="Open Kali Linux .vbox file" src="https://github.com/user-attachments/assets/e11fa948-8552-46d7-aa44-44b1c0f5354d" />
+<img width="919" height="740" alt="Oracle VirtualBox" src="https://github.com/user-attachments/assets/70c5ae93-babe-4e0c-9538-c388c3ab055b" />
+
+4. Open **Settings** for the Kali Linux VM
+5. Navigate to **Network** and set **Attached to** to **NAT Network**
+6. Select **SplunkNetwork** from the dropdown
+
+<img width="773" height="514" alt="Enable NAT Network for Kali Linux machine" src="https://github.com/user-attachments/assets/33801a75-1b8a-44b1-a593-fe44a8bc9eda" />
+
+7. Click **OK**
+
+#### Change Login Information
+
+1. In Oracle VirtualBox Manager, select and start the Kali Linux VM
+2. Sign in using the default credentials **kali/kali**
+3. Open terminal via **Ctrl + Alt + t** or click the **Terminal** icon on the top bar
+
+<img width="1278" height="883" alt="Open terminal" src="https://github.com/user-attachments/assets/ecec3baa-08a6-46ea-9ca1-f5c08b1087e8" />
+
+> **Note:** Kali Linux won't let you change the username of the default user account. We will switch to this **root** user to adjust the username of the root user.
+
+4. Sign into **root** user
+5. Change **root** user password
+6. Change password
+
+<img width="1056" height="883" alt="Terminal sign into root user" src="https://github.com/user-attachments/assets/9aaaadd8-ca80-4671-aeaf-8b84e4a81db3" />
+
+7. Power off machine and sign back in under the **root** user
+8. Follow <a href="https://www.hexzilla.com/p/change-username-hostname-on-kali-linux-2025-update" target="_blank">this</a> article to change username and hostname in Kali Linux
+
+<img width="1078" height="956" alt="Change username" src="https://github.com/user-attachments/assets/0b74029b-49d5-47cf-9ea4-5d8e08c90190" />
+
+9. Power off machine and sign back in under the **attacker** user
+10. Change password
+
+<img width="1077" height="945" alt="Change password" src="https://github.com/user-attachments/assets/dc7f90b9-9b40-4c13-95a9-e3212ddc0b78" />
+
+#
+
+<a href="active-directory-domain-controller-anchor-point"></a>
+### Active Directory Domain Controller
+
+
+
+#
+
+<a href="splunk-server-anchor-point"></a>
+### Splunk Server
+
