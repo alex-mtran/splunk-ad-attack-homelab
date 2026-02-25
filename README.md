@@ -49,9 +49,9 @@ Oracle VirtualBox is a free, open-source hypervisor that allows for running mult
 <a name="windows-10-anchor-point"></a>
 ### Windows 10
 
-#### Download Windows 10 ISO
-
 The Windows 10 machine will serve as our target endpoint representing a typical user workstation in an enterprise environment. This machine will be domain-joined, monitored by Sysmon, and forward logs to Splunk.
+
+#### Download Windows 10 ISO
 
 1. <a href="https://www.microsoft.com/en-ca/software-download/windows10" target="_blank">Download Windows 10 ISO</a>.
 2. Click **Download Now** to download the Media Creation Tool.
@@ -144,9 +144,9 @@ Atomic red team is a PowerShell-based execution framework built around the MITRE
 <a name="kali-linux-anchor-point"></a>
 ### Kali Linux
 
-#### Download and Install Kali Linux
-
 The Kali Linux machine will serve as our attacker, representing a threat actor within the security environment. This machine will generate malicious telemetry to the Active Directory domain and target Windows machine that we can detect and analyze in Splunk.
+
+#### Download and Install Kali Linux
 
 1. Download the Kali Linux virtual machine image from the <a href="https://www.kali.org/get-kali/#kali-virtual-machines" target="_blank">official Kali Linux website</a>.
 
@@ -232,10 +232,16 @@ ifconfig
 <a href="active-directory-domain-controller-anchor-point"></a>
 ### Active Directory Domain Controller
 
+The Windows Server 2022 acts as the central authority for network security, authentication, and authorization. It handles login requests, enforces security policies, and replicates changes to other domain controllers to ensure consistency across the network.
 
+#### Download Windows Server 2022
+
+1. Download the Windows Server image from the <a href="https://info.microsoft.com/ww-landing-windows-server-2022.html" target="_blank">official Windows Server website</a>.
+2. 
 
 #
 
 <a href="splunk-server-anchor-point"></a>
 ### Splunk Server
+
 
