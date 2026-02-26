@@ -234,10 +234,44 @@ ifconfig
 
 The Windows Server 2022 acts as the central authority for network security, authentication, and authorization. It handles login requests, enforces security policies, and replicates changes to other domain controllers to ensure consistency across the network.
 
+The Active Directory Domain Controller acts as the central target and primary data source for security monitoring. It performs its normal administrative functions (handling login requests, enforcing security policies, replicating changes across other domain controllers, etc.), while also generating the logs that Splunk collects to enable attack detection and analysis. We will deploy the Active Directory Domain Services on a Windows Server 2022.
+
 #### Download Windows Server 2022
 
 1. Download the Windows Server image from the <a href="https://info.microsoft.com/ww-landing-windows-server-2022.html" target="_blank">official Windows Server website</a>.
-2. 
+2. Open **Oracle VirtualBox** and click **New**
+3. Fill in:
+
+   **Virtual Name and OS**
+   
+   <img width="781" height="557" alt="Windows Server 2022 Virtual Name and OS" src="https://github.com/user-attachments/assets/b215a0a5-66a5-4f8b-973a-79e473da4bbb" />
+
+   **Virtual Hardware**
+
+   <img width="779" height="556" alt="Windows Server 2022 Virtual Hardware" src="https://github.com/user-attachments/assets/e80c3ef1-11c6-4cf8-b648-fbdc5fda36b1" />
+
+4. Leave the rest as default and click **Finish**
+
+#### Configuring Windows Server 2022
+1. Start the **ADDC01** server.
+2. Click **Next** and **Install Now**.
+3. Select **Windows Server 2022 Standard Evaluation (Desktop Experience)** for the operating system.
+
+<img width="1027" height="849" alt="Windows Server 2022 Operating System" src="https://github.com/user-attachments/assets/e87baee5-563a-4c9d-b78d-2d4460e22d7b" />
+
+4. Accept the terms and agreements and click **Next**.
+5. Select **Custom: Install Microsoft Server Operating System only (advanced)** and click **Next**.
+
+<img width="1030" height="849" alt="Windows Server 2022 Installation Type" src="https://github.com/user-attachments/assets/689497c2-0421-44f6-ad67-f54c4cb1764c" />
+
+6. Create a password and click **Finish**.
+> **Note:** To unlock via **Ctrl + Alt + Delete** on a virtual machine, click the **Input** button at the top bar and under the **Keyboard** dropbar there is a button for that key command.
+> 
+> <img width="1021" height="850" alt="Ctrl + Alt + Delete on virtual machine" src="https://github.com/user-attachments/assets/a56dab30-e737-4551-a589-9a6ffac40953" />
+
+#### Installing Active Directory Domain Services
+
+
 
 #
 
