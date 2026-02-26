@@ -1,5 +1,5 @@
 # Splunk Active Directory Attack Homelab (IN PROGRESS)
-Home lab for practicing Active Directory security monitoring and attack detection using Splunk SIEM. Built with Oracle VirtualBox VMs for log ingestion and analysis.
+Home lab for practicing Active Directory security monitoring and attack detection using Splunk SIEM. Built with Oracle VirtualBox VMs for log ingestion and analysis. The server versions are the latest as of the creation of this project.
 
 This project demonstrates:
 - Active Directory security monitoring and log analysis
@@ -232,9 +232,7 @@ ifconfig
 <a href="active-directory-domain-controller-anchor-point"></a>
 ### Active Directory Domain Controller
 
-The Windows Server 2022 acts as the central authority for network security, authentication, and authorization. It handles login requests, enforces security policies, and replicates changes to other domain controllers to ensure consistency across the network.
-
-The Active Directory Domain Controller acts as the central target and primary data source for security monitoring. It performs its normal administrative functions (handling login requests, enforcing security policies, replicating changes across other domain controllers, etc.), while also generating the logs that Splunk collects to enable attack detection and analysis. We will deploy the Active Directory Domain Services on a Windows Server 2022.
+The Active Directory Domain Controller (ADDC) is both the infrastructure backbone and the system we're monitoring for signs of compromise. The DC handles standard administrative functions such as authentication requests, group policies, and replication while also generating the logs that Splunk collects to enable attack detection and analysis. We will deploy the Active Directory Domain Services on a Windows Server 2022.
 
 #### Download Windows Server 2022
 
@@ -278,4 +276,45 @@ The Active Directory Domain Controller acts as the central target and primary da
 <a href="splunk-server-anchor-point"></a>
 ### Splunk Server
 
+The Splunk Server acts as the central log aggregation and analysis platform for this lab environment. It ingests and indexes Windows Event Logs forwarded from the Domain Controller and other endpoints via the Splunk Universal Forwarder for us to search, correlate, and visualize security events. We will deploy the Splunk Server on an Ubuntu Server 24.04. 
 
+#### Download Ubuntu Server 24.04.4 LTS
+
+1. Download the Ubuntu Server 24.04.4 LTS image from the <a href="https://ubuntu.com/download/server" target="_blank">official Ubuntu server website</a>.
+2. Open **Oracle VirtualBox** and click **New**
+3. Fill in:
+
+   **Virtual Name and OS**
+   
+   <img width="782" height="555" alt="Ubuntu Server 24.04.4 LTS virtual name and os" src="https://github.com/user-attachments/assets/41f9269a-f475-42c0-a6c4-2c99c11f69e2" />
+
+   **Virtual Hardware**
+
+   <img width="783" height="559" alt="Ubuntu Server 24.04.4 LTS virtual hardware" src="https://github.com/user-attachments/assets/4f277242-0e8a-4ee3-aa78-df206dc59d69" />
+
+   **Virtual Hard Disk**
+
+   <img width="783" height="559" alt="Ubuntu Server 24.04.4 LTS virtual hard disk" src="https://github.com/user-attachments/assets/4c687748-cc28-4efb-bc95-ec73bdf87603" />
+
+4. Leave the rest as default and click **Finish**
+
+#### Configuring Ubuntu Server 24.04.4 LTS
+1. Start the **Splunk** server.
+2. Select **Try or Install Ubuntu Server** and hit **Enter** on the keyboard.
+3. Keep the defaults and continue until reaching the profile setup page.
+
+<img width="1155" height="918" alt="Splunk server profile page" src="https://github.com/user-attachments/assets/ed5dee9b-2188-47b4-ae8d-a01b0ab26457" />
+
+4. Fill out the profile page.
+5. Keep defaults and reboot the machine by clicking **Reboot Now**.
+6. Press **Enter** on the keyboard when prompted with the errors to continue with reboot.
+7. Sign in after reboot finishes.
+> **Note:** Inputting keys into the password field will not output any visible characters to the screen. This is intentional. Fill out the password regardless.
+
+<img width="1276" height="883" alt="Sign into splunk server" src="https://github.com/user-attachments/assets/cad71b39-db0b-4966-9732-72d72fb652df" />
+
+8. Update and upgrade repository.
+
+<img width="992" height="879" alt="Splunk update and upgrade repository commands" src="https://github.com/user-attachments/assets/d8b0127c-36dc-47fe-976d-1765d8465116" />
+
+9. Press **Enter** on the keyboard when the terminal finishes scanning for updates.
