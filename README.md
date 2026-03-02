@@ -194,7 +194,7 @@ Kali Linux does not allow changing hte username of the default user through stan
 
 <img width="1077" height="945" alt="Change password" src="https://github.com/user-attachments/assets/dc7f90b9-9b40-4c13-95a9-e3212ddc0b78" />
 
-#### Configuring a Static IP address
+#### Configuring Static IP
 
 1. Open a terminal and run the following commands to note your current gateway, IP address, and subnet mask:
 
@@ -319,5 +319,41 @@ The Splunk Server acts as the central log aggregation and analysis platform for 
 
 9. Press **Enter** on the keyboard when the terminal finishes scanning for updates.
 
-> **Note:** Don't forget to add/change network adapter to NAT Network on all machines (Splunk, Windows 10 Splunk Forwarder, ADDC01)!
+> **Note:** Don't forget to add/change network adapter to NAT Network on all machines (Splunk, Windows 10 Splunk Forwarder, ADDC01, kali-linux-2025.4-virtualbox-amd64)!
+
+#### Configuring Static IP and Internet Connectivity
+
+Because DHCP is set to enabled when we created the Nat Network, by default, each machine under the Nat Network (SplunkNetwork) will be given its own dynamic IP. For convenience and to always stay consistent with our project diagram, we will configure this machine to have a static IP of 192.168.100.10.
+
+In the **Splunk** server machine:
+
+1. Type the command `sudo nano /etc/netplan/` and tab complete to enter the machine's config.yaml file. Run this command.
+
+<img width="1279" height="885" alt="Config.yaml command" src="https://github.com/user-attachments/assets/3e956d53-c961-4c43-a3a6-80940ecaa62d" />
+
+<img width="1280" height="882" alt="Config.yaml file" src="https://github.com/user-attachments/assets/f4bcf9f3-b256-4813-bac9-f90e72446218" />
+
+2. Change config.yaml contents. Hit `Ctrl + X` > `Y` > `Enter` to save contents.
+
+<img width="1279" height="885" alt="Change config.yaml contents" src="https://github.com/user-attachments/assets/c4b5c95c-8189-4dd0-9339-c35731afd8e8" />
+
+> **Note:** Do take note of the spacing: 
+>
+>3 tabs: `addresses`, `nameservers`, `routes`<br>
+>5 tabs: `addresses` (under nameserver), `- to`<br>
+>6 tabs: `via`
+>
+>[8.8.8.8] is the free, public DNS Google server. [192.168.100.1] is the default gateway of our Nat Network SplunkNetwork. Take a look at <a href="professormesser.com/network-plus/n10-006/ipv4-classes/" target="_blank">this video</a> to learn more about IP addresses.
+> 
+> When clicking into the Splunk machine window, the mouse will disappear. To make it reappear press `Right Alt`.
+
+3. Run the command `sudo netplan apply` and verify static IP address to be `192.168.100.10`.
+
+<img width="1278" height="886" alt="Verify IP address" src="https://github.com/user-attachments/assets/883b5d90-bd46-4328-abcd-f88caa8a550d" />
+
+<img width="1275" height="879" alt="Ping google.com to verify internet connection" src="https://github.com/user-attachments/assets/467aa0f7-7b34-4e7f-9ef3-1708da8e26cb" />
+
+> **Note:** To stop pinging after running the `ping` command, press `Ctrl + C`.
+
+#### Install Splunk
 
