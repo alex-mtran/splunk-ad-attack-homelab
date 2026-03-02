@@ -51,7 +51,7 @@ Oracle VirtualBox is a free, open-source hypervisor that allows for running mult
 
 The Windows 10 machine will serve as our target endpoint representing a typical user workstation in an enterprise environment. This machine will be domain-joined, monitored by Sysmon, and forward logs to Splunk.
 
-#### Download Windows 10 ISO
+#### Download Windows 10
 
 1. <a href="https://www.microsoft.com/en-ca/software-download/windows10" target="_blank">Download Windows 10 ISO</a>.
 2. Click **Download Now** to download the Media Creation Tool.
@@ -105,7 +105,7 @@ Windows will now install. This process takes 10-15 minutes and will reboot sever
 
 #### NAT Network
 
-The NAT Network adapter enables internet connectivity and inter-VM communication.
+The NAT Network adapter enables internet connectivity and inter-VM communication. This network adapter must be enabled on all of the machines in the network.
 
 1. In **Oracle VirtualBox Manager**, navigate to **File > Tools > Network**.
 
@@ -146,7 +146,7 @@ Atomic red team is a PowerShell-based execution framework built around the MITRE
 
 The Kali Linux machine will serve as our attacker, representing a threat actor within the security environment. This machine will generate malicious telemetry to the Active Directory domain and target Windows machine that we can detect and analyze in Splunk.
 
-#### Download and Install Kali Linux
+#### Download Kali Linux
 
 1. Download the Kali Linux virtual machine image from the <a href="https://www.kali.org/get-kali/#kali-virtual-machines" target="_blank">official Kali Linux website</a>.
 
@@ -318,3 +318,6 @@ The Splunk Server acts as the central log aggregation and analysis platform for 
 <img width="992" height="879" alt="Splunk update and upgrade repository commands" src="https://github.com/user-attachments/assets/d8b0127c-36dc-47fe-976d-1765d8465116" />
 
 9. Press **Enter** on the keyboard when the terminal finishes scanning for updates.
+
+> **Note:** Don't forget to add/change network adapter to NAT Network on all machines (Splunk, Windows 10 Splunk Forwarder, ADDC01)!
+
