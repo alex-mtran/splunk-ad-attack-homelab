@@ -40,8 +40,10 @@ Network: Internal network (192.168.50.0/24)
 
 Oracle VirtualBox is a free, open-source hypervisor that allows for running multiple operating systems simultaneously on a single host machine. It will serve as the foundation for this entire lab environment.
 
-1. <a href="https://www.virtualbox.org/wiki/Downloads" target="_blank">Download Oracle VirtualBox</a>.
+1. <a href="https://www.virtualbox.org/wiki/Downloads">Download Oracle VirtualBox</a>.
+
 2. Run the installer and follow the installation wizard with default settings.
+
 3. Verify installation by opening VirtualBox Manager.
 
 #
@@ -53,15 +55,20 @@ The Windows 10 machine will serve as our target endpoint representing a typical 
 
 #### Download Windows 10
 
-1. <a href="https://www.microsoft.com/en-ca/software-download/windows10" target="_blank">Download Windows 10 ISO</a>.
+1. <a href="https://www.microsoft.com/en-ca/software-download/windows10">Download Windows 10 ISO</a>.
+
 2. Click **Download Now** to download the Media Creation Tool.
+
 3. Run the tool and select **Create installation media (USB flash drive, DVD, or ISO file)**.
+
 4. Choose **ISO file** and save it to a known location.
 
 #### Create Virtual Machine
 
 1. Open **Oracle VirtualBox Manager**.
+
 2. Click **New** to create a new virtual machine.
+
 3. Fill in:
 
    **Virtual Name and OS**
@@ -81,6 +88,7 @@ The Windows 10 machine will serve as our target endpoint representing a typical 
 #### Install Windows 10
 
 1. In Oracle VirtualBox Manager, select and start the Windows 10 VM.
+
 2. The Windows installation screen will begin automatically. Configure Windows setup:
 
   <img width="957" height="857" alt="Windows setup" src="https://github.com/user-attachments/assets/eebf25d0-4bcd-4baa-a7c9-c167947ae030" />
@@ -98,9 +106,13 @@ Windows will now install. This process takes 10-15 minutes and will reboot sever
 #### Configure Windows 10
 
 1. Select **Set up for personal use** and Click **Next**.
+
 2. Click **Offline Account**.
+
 3. Click **Limited Experience**.
+
 4. Enter username and password.
+
 5. Click **Not now** or **Skip** for optional features until reaching the Windows homescreen.
 
 #### NAT Network
@@ -123,13 +135,14 @@ The NAT Network adapter enables internet connectivity and inter-VM communication
 <img width="927" height="740" alt="Open Windows 10 settings" src="https://github.com/user-attachments/assets/692c4133-7eb4-41d9-9a52-c26d4e1f8e14" />
 
 4. Navigate to **Network** and set **Attached to** to **NAT Network**.
+
 5. Select **SplunkNetwork** from the dropdown.
 
 <img width="773" height="510" alt="Enable NAT Network for Windows 10 machine" src="https://github.com/user-attachments/assets/72eeac86-8061-4e4d-a396-4c11d0b87b14" />
 
 6. Click **OK**
 
-> **Note:** NAT Network allows multiple VMs to share the host's IP address for internet access while enabling VM-to-VM communication. This differs from a standard NAT adapter, which isolates VMs from each other. <a href="https://www.youtube.com/watch?v=Fhdxk4bmJCs" target="_blank">Learn more about VirtualBox network adapters</a>.
+> **Note:** NAT Network allows multiple VMs to share the host's IP address for internet access while enabling VM-to-VM communication. This differs from a standard NAT adapter, which isolates VMs from each other. <a href="https://www.youtube.com/watch?v=Fhdxk4bmJCs">Learn more about VirtualBox network adapters</a>.
 
 #### Sysmon
 
@@ -148,13 +161,13 @@ The Kali Linux machine will serve as our attacker, representing a threat actor w
 
 #### Download Kali Linux
 
-1. Download the Kali Linux virtual machine image from the <a href="https://www.kali.org/get-kali/#kali-virtual-machines" target="_blank">official Kali Linux website</a>.
+1. Download the Kali Linux virtual machine image from the <a href="https://www.kali.org/get-kali/#kali-virtual-machines">official Kali Linux website</a>.
 
 <img width="966" height="678" alt="Kali Linux Download Page" src="https://github.com/user-attachments/assets/d1d13ae5-8b60-4b9a-a53b-a37b2de5dc8b" />
 
 > **Note:** The default credentials for this machine are `kali`/`kali`.
 
-2. Extract the downloaded archive using <a href="https://www.7-zip.org/" target="_blank">7-zip</a>.
+2. Extract the downloaded archive using <a href="https://www.7-zip.org/">7-zip</a>.
 <img width="587" height="387" alt="Extract Kali Linux folder with 7-zip" src="https://github.com/user-attachments/assets/a56655e5-a136-48fa-9f8c-38944a5fa281" />
 
 3. Open Kali Linux `.vbox` file using **Oracle VirtualBox** to import the machine.
@@ -164,7 +177,9 @@ The Kali Linux machine will serve as our attacker, representing a threat actor w
 <img width="919" height="740" alt="Oracle VirtualBox" src="https://github.com/user-attachments/assets/70c5ae93-babe-4e0c-9538-c388c3ab055b" />
 
 4. Once imported, open **Settings** for the Kali Linux VM and navigate to the **Network** tab.
+
 5. Set **Attached to** to **NAT Network**, then select the **SplunkNetwork** from the dropdown.
+
 6. Click **OK**.
 
 <img width="773" height="514" alt="Enable NAT Network for Kali Linux machine" src="https://github.com/user-attachments/assets/33801a75-1b8a-44b1-a593-fe44a8bc9eda" />
@@ -174,6 +189,7 @@ The Kali Linux machine will serve as our attacker, representing a threat actor w
 Kali Linux does not allow changing hte username of the default user through standard methods. To rename the account, we must first switch to the root user.
 
 1. Start the Kali Linux VM and sign in with the default credentials `kali`/`kali`.
+
 2. Open a terminal using **Ctrl + Alt + T** or click the Terminal icon in the top bar.
 
 <img width="1278" height="883" alt="Open terminal" src="https://github.com/user-attachments/assets/ecec3baa-08a6-46ea-9ca1-f5c08b1087e8" />
@@ -185,11 +201,13 @@ Kali Linux does not allow changing hte username of the default user through stan
 <img width="1056" height="883" alt="Terminal sign into root user" src="https://github.com/user-attachments/assets/9aaaadd8-ca80-4671-aeaf-8b84e4a81db3" />
 
 4. Power off the machine and sign back in as **root**.
-5. Follow <a href="https://www.hexzilla.com/p/change-username-hostname-on-kali-linux-2025-update" target="_blank">this guide</a> to rename the default username.
+
+5. Follow <a href="https://www.hexzilla.com/p/change-username-hostname-on-kali-linux-2025-update">this guide</a> to rename the default username.
 
 <img width="1078" height="956" alt="Change username" src="https://github.com/user-attachments/assets/0b74029b-49d5-47cf-9ea4-5d8e08c90190" />
 
 6. Power off the machine and sign back in as **attacker**.
+
 7. Set a new password.
 
 <img width="1077" height="945" alt="Change password" src="https://github.com/user-attachments/assets/dc7f90b9-9b40-4c13-95a9-e3212ddc0b78" />
@@ -206,11 +224,13 @@ ifconfig
 <img width="1078" height="949" alt="IP configuration" src="https://github.com/user-attachments/assets/a214ae06-953d-4125-8600-634c20965cad" />
 
 2. Right-click the network icon in the taskbar and select **Edit Connections...**
+
 3. Select **Wired connection 1** and click the settings icon to open its configuration.
 
 <img width="1079" height="949" alt="Path visual to wired connection settings" src="https://github.com/user-attachments/assets/50e1f032-c788-4204-aee2-d242471def12" />
 
 4. Navigate to the **IPv4 Settings** tab and change the **Method** from **Automatic (DHCP)** to **Manual**.
+
 5. Click **Add** and enter the following values:
 
 |  Field  |  Value  |
@@ -236,8 +256,10 @@ The Active Directory Domain Controller (ADDC) is both the infrastructure backbon
 
 #### Download Windows Server 2022
 
-1. Download the Windows Server image from the <a href="https://info.microsoft.com/ww-landing-windows-server-2022.html" target="_blank">official Windows Server website</a>.
+1. Download the Windows Server image from the <a href="https://info.microsoft.com/ww-landing-windows-server-2022.html">official Windows Server website</a>.
+
 2. Open **Oracle VirtualBox** and click **New**
+
 3. Fill in:
 
    **Virtual Name and OS**
@@ -252,12 +274,15 @@ The Active Directory Domain Controller (ADDC) is both the infrastructure backbon
 
 #### Configuring Windows Server 2022
 1. Start the **ADDC01** server.
+
 2. Click **Next** and **Install Now**.
+
 3. Select **Windows Server 2022 Standard Evaluation (Desktop Experience)** for the operating system.
 
 <img width="1027" height="849" alt="Windows Server 2022 Operating System" src="https://github.com/user-attachments/assets/e87baee5-563a-4c9d-b78d-2d4460e22d7b" />
 
 4. Accept the terms and agreements and click **Next**.
+
 5. Select **Custom: Install Microsoft Server Operating System only (advanced)** and click **Next**.
 
 <img width="1030" height="849" alt="Windows Server 2022 Installation Type" src="https://github.com/user-attachments/assets/689497c2-0421-44f6-ad67-f54c4cb1764c" />
@@ -280,8 +305,10 @@ The Splunk Server acts as the central log aggregation and analysis platform for 
 
 #### Download Ubuntu Server 24.04.4 LTS
 
-1. Download the Ubuntu Server 24.04.4 LTS image from the <a href="https://ubuntu.com/download/server" target="_blank">official Ubuntu server website</a>.
+1. Download the Ubuntu Server 24.04.4 LTS image from the <a href="https://ubuntu.com/download/server">official Ubuntu server website</a>.
+
 2. Open **Oracle VirtualBox** and click **New**
+
 3. Fill in:
 
    **Virtual Name and OS**
@@ -300,14 +327,19 @@ The Splunk Server acts as the central log aggregation and analysis platform for 
 
 #### Configuring Ubuntu Server 24.04.4 LTS
 1. Start the **Splunk** server.
+
 2. Select **Try or Install Ubuntu Server** and hit **Enter** on the keyboard.
+
 3. Keep the defaults and continue until reaching the profile setup page.
 
 <img width="1155" height="918" alt="Splunk server profile page" src="https://github.com/user-attachments/assets/ed5dee9b-2188-47b4-ae8d-a01b0ab26457" />
 
 4. Fill out the profile page.
+
 5. Keep defaults and reboot the machine by clicking **Reboot Now**.
+
 6. Press **Enter** on the keyboard when prompted with the errors to continue with reboot.
+
 7. Sign in after reboot finishes.
 > **Note:** Inputting keys into the password field will not output any visible characters to the screen. This is intentional. Fill out the password regardless.
 
@@ -343,7 +375,7 @@ In the **Splunk** server machine:
 >5 tabs: `addresses` (under nameserver), `- to`<br>
 >6 tabs: `via`
 >
->[8.8.8.8] is the free, public DNS Google server. [192.168.100.1] is the default gateway of our Nat Network SplunkNetwork. Take a look at <a href="professormesser.com/network-plus/n10-006/ipv4-classes/" target="_blank">this video</a> to learn more about IP addresses.
+>[8.8.8.8] is the free, public DNS Google server. [192.168.100.1] is the default gateway of our Nat Network SplunkNetwork. Take a look at <a href="professormesser.com/network-plus/n10-006/ipv4-classes/">this video</a> to learn more about IP addresses.
 > 
 > When clicking into the Splunk machine window, the mouse will disappear. To make it reappear press `Right Alt`.
 
@@ -355,5 +387,81 @@ In the **Splunk** server machine:
 
 > **Note:** To stop pinging after running the `ping` command, press `Ctrl + C`.
 
+#### Sign up for Splunk
+
+In the Host machine:
+
+1. Sign up for a splunk account at the <a href="https://www.splunk.com/" target="__blank">official splunk website</a>.
+
+2. Press `Trials and Downloads`.
+
+3. Press `Get My Free Trial` for `Splunk Enterprise`.
+
+4. Download the Linux .deb file.
+
 #### Install Splunk
 
+In the Splunk server machine:
+
+1. Type command `sudo apt-get install virtualbox` and hit `Tab` twice to view guest additions. Install `virtualbox-guest-additions-iso`.
+
+<img width="1279" height="881" alt="Virtualbox splunk server guest additions options" src="https://github.com/user-attachments/assets/7a96bb20-5fb1-4230-b55c-c31e8f656540" />
+
+> **Note:** Press `Y` if prompted. Press `Enter` to restart all needed services if prompted.
+
+2. Go to the top bar of the VM and click `Devices` > `Shared Folders` > `Shared Folder Settings...`
+
+<img width="1279" height="889" alt="Create share folder GUI path" src="https://github.com/user-attachments/assets/afa352d3-28d9-4970-931f-71474cb81dd8" />
+
+<img width="779" height="521" alt="Create shared folder" src="https://github.com/user-attachments/assets/2436a73d-67e2-4897-adef-6700d58bdb59" />
+
+3. Create a shared folder with the same path as the folder with the Splunk installer.
+
+<img width="776" height="517" alt="Shared folder settings" src="https://github.com/user-attachments/assets/e3909884-f8ef-4c41-9a3c-ef7f7a2b746e" />
+
+4. Press `OK` until back to the main terminal.
+
+5. Run the command `sudo reboot` to reboot machine.
+
+6. Run the command `sudo adduser [username] vboxsf` to add the user to the vboxsf group.
+
+<img width="1282" height="885" alt="Add user to vboxsf group command" src="https://github.com/user-attachments/assets/660568b5-68fb-4e6d-ac92-08e917560e2c" />
+
+> **Note:** [username] should be replaced with the username of the user account name that you are using. For example, I would put `alexsplunk` here.
+>
+> Furthermore, as shown in the image above, the group `vboxsf` does not exist. To fix this, we run `sudo apt-get install virtualbox-guest-utils`. After running that command, reboot and try again.
+
+<img width="1277" height="885" alt="Add user to vboxsf group command after installing guest-utils" src="https://github.com/user-attachments/assets/6577130b-280d-4747-ba66-f59e46c80261" />
+
+7. Run the command `mkdir share` to create a folder called `share`.
+
+<img width="1280" height="877" alt="Make share folder" src="https://github.com/user-attachments/assets/e39d255f-fa06-4e05-961c-ae4092288564" />
+
+8. Mount the shared folder onto the directory called `share`. Run the command `sudo mount -t vboxsf -o uid=1000,gid=1000 [folder name] share/`
+
+<img width="1278" height="878" alt="Mount shared folder onto share directory" src="https://github.com/user-attachments/assets/08269dae-f440-4612-a7c2-988f7cc6516d" />
+
+> **Note:** [folder name] should be replaced with the name of the shared folder we created in step 3. For example, I would put `Active-Directory-Project` here.
+>
+> To verify that the step worked, run the command `ls -la` and find the `share` folder we created earlier. It should be highlighted as seen in the above image.
+
+9. Run the command `cd share/` to enter the `share` directory and run `ls -la` to view all the files in that directory, namely the splunk.deb installer.
+
+10. Type the command `sudo dpkg -i splunk` and tab complete. Run this command to install the splunk .deb package. 
+
+<img width="1279" height="885" alt="Install splunk deb package" src="https://github.com/user-attachments/assets/03a803e7-425f-4680-b31c-d65c0a1cceb2" />
+
+11. Run the following commands to run as the user `splunk` in order to run the installer executable `./splunk` located in the `/opt/splunk/bin` directory.
+
+<img width="1278" height="887" alt="Commands to run splunk executable" src="https://github.com/user-attachments/assets/8cdc51d9-9070-44da-90f8-c7d2c5d069b3" />
+
+12. Scroll to the bottom by hitting `Spacebar` repeatedly and accept the terms of agreement. Input an administrator username and password and wait for installation to finish.
+
+13. Run the following commands to make Splunk start up everytime the virtual machine reboots (as user `splunk`).
+
+<img width="1281" height="887" alt="Commands to run ./splunk on reboot" src="https://github.com/user-attachments/assets/c51ace95-0cbd-4720-b2f3-c28dc6137645" />
+
+#### Splunk Universal Forwarder
+
+
+#### Sysmon
