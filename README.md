@@ -303,7 +303,7 @@ The Active Directory Domain Controller (ADDC) is both the infrastructure backbon
 
 The Splunk Server acts as the central log aggregation and analysis platform for this lab environment. It ingests and indexes Windows Event Logs forwarded from the Domain Controller and other endpoints via the Splunk Universal Forwarder for us to search, correlate, and visualize security events. We will deploy the Splunk Server on an Ubuntu Server 24.04. 
 
-#### Download Ubuntu Server 24.04.4 LTS
+#### Download Splunk Server
 
 1. Download the Ubuntu Server 24.04.4 LTS image from the <a href="https://ubuntu.com/download/server">official Ubuntu server website</a>.
 
@@ -325,7 +325,8 @@ The Splunk Server acts as the central log aggregation and analysis platform for 
 
 4. Leave the rest as default and click **Finish**
 
-#### Configuring Ubuntu Server 24.04.4 LTS
+#### Configuring Splunk Server
+
 1. Start the **Splunk** server.
 
 2. Select **Try or Install Ubuntu Server** and hit **Enter** on the keyboard.
@@ -459,9 +460,10 @@ In the Splunk server machine:
 
 13. Run the following commands to make Splunk start up everytime the virtual machine reboots (as user `splunk`).
 
-<img width="1281" height="887" alt="Commands to run ./splunk on reboot" src="https://github.com/user-attachments/assets/c51ace95-0cbd-4720-b2f3-c28dc6137645" />
+<img width="1279" height="885" alt="Commands to run ./splunk on reboot" src="https://github.com/user-attachments/assets/afa1fec7-0ce7-41d3-abc5-a8c21839c301" />
 
 #### Splunk Universal Forwarder
+
 
 
 #### Sysmon
