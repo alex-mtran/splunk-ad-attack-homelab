@@ -103,7 +103,7 @@ The Windows 10 machine will serve as our target endpoint representing a typical 
 
 Windows will now install. This process takes 10-15 minutes and will reboot several times automatically. Once installation completes, Windows will boot to the desktop with your configured username. Your Windows 10 virtual machine is now up and running.
 
-#### Configure Windows 10
+#### Windows Setup
 
 1. Select **Set up for personal use** and Click **Next**.
 
@@ -114,6 +114,26 @@ Windows will now install. This process takes 10-15 minutes and will reboot sever
 4. Enter username and password.
 
 5. Click **Not now** or **Skip** for optional features until reaching the Windows homescreen.
+
+6. Change hostname to `target-PC`. Search `PC` in the search bar and click `Properties` > `Rename this PC`. Then restart machine. Go through the PC properties once more to verify that the hostname is now `target-PC`.
+
+<img width="1022" height="874" alt="PC Properties" src="https://github.com/user-attachments/assets/78456372-f56e-414f-a2a9-216cbc8d1937" />
+
+<img width="1021" height="873" alt="Update PC name" src="https://github.com/user-attachments/assets/f261f76d-3c02-4327-8981-c5d8852615d8" />
+
+#### Configuring Static IP
+
+1. Open network and internet settings.
+
+<img width="1024" height="853" alt="Open network and internet settings" src="https://github.com/user-attachments/assets/34bf0af8-5463-4b80-a521-60da2401be16" />
+
+2. Click `Change Adapter Options` > Right-click `Ethernet` > Click `Properties`.
+
+<img width="1023" height="855" alt="Change adapter options" src="https://github.com/user-attachments/assets/915500df-acfc-47af-9359-13da16715715" />
+
+3. Select `Internet Protocol Version 4 (TCP/IPv4)` > `Properties`. Then, set static IP. Press `OK`.
+
+<img width="1027" height="853" alt="Set static IP" src="https://github.com/user-attachments/assets/24e7aa06-994e-42f6-8ecf-2eaa0484ea73" />
 
 #### NAT Network
 
