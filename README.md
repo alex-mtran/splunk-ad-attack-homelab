@@ -170,7 +170,7 @@ The NAT Network adapter enables internet connectivity and inter-VM communication
 
 Splunk universal forwarder is an agent designed to collect, monitor, and stream data in real-time to Splunk Enterprise or Cloud. It provides secure, reliable data forwarding with minimal resource consumption.
 
-1. In the Windows 10 machine, open up a browser to the <a href="www.splunk.com"> Splunk website</a> and login. If you haven't signed up yet, follow the sign up instructions listed [here](#sign-up-for-splunk-anchor-point)
+1. In the Windows 10 machine, open up a browser to the <a href="www.splunk.com"> Splunk website</a> and login. If you haven't signed up yet, follow the sign up instructions listed [here](#sign-up-for-splunk-anchor-point).
 
 2. Press `Trials and Downloads`.
 
@@ -341,7 +341,7 @@ ifconfig
 
 #
 
-<a href="active-directory-domain-controller-anchor-point"></a>
+<a name="active-directory-domain-controller-anchor-point"></a>
 ### Active Directory Domain Controller
 
 The Active Directory Domain Controller (ADDC) is both the infrastructure backbone and the system we're monitoring for signs of compromise. The DC handles standard administrative functions such as authentication requests, group policies, and replication while also generating the logs that Splunk collects to enable attack detection and analysis. We will deploy the Active Directory Domain Services on a Windows Server 2022.
@@ -390,7 +390,7 @@ The Active Directory Domain Controller (ADDC) is both the infrastructure backbon
 
 #
 
-<a href="splunk-server-anchor-point"></a>
+<a name="splunk-server-anchor-point"></a>
 ### Splunk Server
 
 The Splunk Server acts as the central log aggregation and analysis platform for this lab environment. It ingests and indexes Windows Event Logs forwarded from the Domain Controller and other endpoints via the Splunk Universal Forwarder for us to search, correlate, and visualize security events. We will deploy the Splunk Server on an Ubuntu Server 24.04. 
@@ -427,7 +427,7 @@ The Splunk Server acts as the central log aggregation and analysis platform for 
 
 <img width="1155" height="918" alt="Splunk server profile page" src="https://github.com/user-attachments/assets/ed5dee9b-2188-47b4-ae8d-a01b0ab26457" />
 
-<a href="splunk-credentials-anchor-point"></a>
+<a name="splunk-credentials-anchor-point"></a>
 4. Fill out the profile page.
 
 5. Keep defaults and reboot the machine by clicking **Reboot Now**.
@@ -481,7 +481,7 @@ In the **Splunk** server machine:
 
 > **Note:** To stop pinging after running the `ping` command, press `Ctrl + C`.
 
-<a href="sign-up-for-splunk-anchor-point"></a>
+<a name="sign-up-for-splunk-anchor-point"></a>
 #### Sign up for Splunk
 
 In the Host machine:
