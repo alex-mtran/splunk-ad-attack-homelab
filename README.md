@@ -428,6 +428,7 @@ The Splunk Server acts as the central log aggregation and analysis platform for 
 <img width="1155" height="918" alt="Splunk server profile page" src="https://github.com/user-attachments/assets/ed5dee9b-2188-47b4-ae8d-a01b0ab26457" />
 
 <a name="splunk-credentials-anchor-point"></a>
+
 4. Fill out the profile page.
 
 5. Keep defaults and reboot the machine by clicking **Reboot Now**.
