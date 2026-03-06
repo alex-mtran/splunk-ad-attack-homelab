@@ -36,6 +36,8 @@ Network: Internal network (192.168.50.0/24)
 
 <img width="681" height="656" alt="Project architecture" src="https://github.com/user-attachments/assets/65f4f6e6-de98-41de-9f42-ade3008f3797" />
 
+This project is divided into sections based on machines and installations for clarity of role and purpose. However, to actually follow along with this project, you must go between the sections as they build upon each other rather than completing one section and moving to the next.
+
 ### Oracle VirtualBox
 
 Oracle VirtualBox is a free, open-source hypervisor that allows for running multiple operating systems simultaneously on a single host machine. It will serve as the foundation for this entire lab environment.
@@ -123,7 +125,7 @@ Windows will now install. This process takes 10-15 minutes and will reboot sever
 
 #### Configuring Static IP
 
-1. Open network and internet settings.
+1. In the Windows 10 machine, open network and internet settings.
 
 <img width="1024" height="853" alt="Open network and internet settings" src="https://github.com/user-attachments/assets/34bf0af8-5463-4b80-a521-60da2401be16" />
 
@@ -164,9 +166,79 @@ The NAT Network adapter enables internet connectivity and inter-VM communication
 
 > **Note:** NAT Network allows multiple VMs to share the host's IP address for internet access while enabling VM-to-VM communication. This differs from a standard NAT adapter, which isolates VMs from each other. <a href="https://www.youtube.com/watch?v=Fhdxk4bmJCs">Learn more about VirtualBox network adapters</a>.
 
+#### Splunk Universal Forwarder
+
+Splunk universal forwarder is an agent designed to collect, monitor, and stream data in real-time to Splunk Enterprise or Cloud. It provides secure, reliable data forwarding with minimal resource consumption.
+
+1. In the Windows 10 machine, open up a browser to the <a href="www.splunk.com"> Splunk website</a> and login. If you haven't signed up yet, follow the sign up instructions listed [here](#sign-up-for-splunk-anchor-point)
+
+2. Press `Trials and Downloads`.
+
+3. Press `Start Download` for `Splunk Universal Forwarder`.
+
+4. Press `Download Now` for the correct OS and accept the terms and agreement to begin download.
+
+5. Open `File Explorer` and go to the `Downloads` directory. There, open up the file we just downloaded.
+
+<img width="1022" height="854" alt="Downloads folder" src="https://github.com/user-attachments/assets/b3ddd18d-959e-461e-bc5e-22d4c162ea65" />
+
+6. Check the box to accept the License Agreement and click `Next`. The default for the Universal Forwarder should be set to `An on-premises Splunk Enterprise instance`.
+
+7. Create an admin username and password and click `Next`.
+
+8. Skip the Deployment Server by clicking `Next`.
+
+9. The Receiving Indexer is the Splunk Server. Input `192.168.100.10:9997` as per the project architecture > `Next` > `Install`.
+
 #### Sysmon
 
-Sysmon (System Monitor) provides detailed, persistent telemetry (or logging) of system activity to the Windows event log via detecting malicious activity, monitoring unauthorized changes to critical files, and analyzing network connections or process creation. 
+Sysmon (System Monitor) provides detailed, persistent telemetry (or logging) of system activity to the Windows event log via detecting malicious activity, monitoring unauthorized changes to critical files, and analyzing network connections or process creation.
+
+1. In the Windows 10 machine, open up a browser to the <a href="https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon"> Sysmon website</a> and click `Download Sysmon`.
+
+2. Go to the <a href="https://github.com/olafhartong/sysmon-modular"> olafhartong sysmon-modular github page</a> and open up the `sysmonconfig.xml` file. Click `Raw` and save the file under the `Downloads` directory.
+
+<img width="1024" height="854" alt="Download sysmonconfig.yml file" src="https://github.com/user-attachments/assets/9e5004c0-6df2-44e2-8ec2-03789d073d87" />
+
+3. Open up `File Explorer` and right-click and click `Extract All...` for the `Sysmon` folder. 
+
+4. In the extracted `Sysmon` folder, copy the folder path.
+
+<img width="1019" height="851" alt="Copy extracted folder path" src="https://github.com/user-attachments/assets/7dc7c78c-7a47-493d-955b-db6638143d59" />
+
+5. Open up `Windows PowerShell` with administrator privileges and run the following commands to start `Sysmon64`.
+
+<img width="1024" height="852" alt="Commands to start Sysmon64" src="https://github.com/user-attachments/assets/33074f30-6d2a-40c0-a0c6-9b885ce7abf2" />
+
+6. Open up `File Explorer` and make a file called `inputs.conf` in the `C:\Program Files\SplunkUniversalForwarder\etc\system\local\` directory by clicking `This PC` > `Local Disk (C:)` and following the above path to get to the desired directory.
+
+<img width="1023" height="853" alt="local directory" src="https://github.com/user-attachments/assets/41fbfd36-f4ac-4054-9227-1c73ce1902c8" />
+
+<img width="1023" height="852" alt="inputs.conf" src="https://github.com/user-attachments/assets/8781f024-76ee-4d68-ba3c-ab3336acb617" />
+
+>**Note:** You can also copy + paste the `inputs.conf` file in this project repository over into this file instead of manually typing this out. Make sure to edit the `inputs.conf` file from the `local` directory and not the `default` directory.
+>
+> Further note, anytime the `inputs.conf` file is updated, the Splunk Universal Forwarder service must be restarted. Run `Services` as administrator (in the search bar in the bottom task bar) and look for `SplunkForwarder` services to restart. Also check its properties and go to the `Log On` tab and set it to log on as `Local System account`. If SplunkForwarder is ran as account NT Service, this might not allow all of the logs to be collected due to its permissions.
+>
+> <img width="1023" height="852" alt="SplunkForwarder properties" src="https://github.com/user-attachments/assets/2674719d-363e-42be-9f71-48f018b025df" />
+>
+> For more information on the `inputs.conf` file, see the official <a href="https://help.splunk.com/en/data-management/splunk-enterprise-admin-manual/9.1/configuration-file-reference/9.1.1-configuration-file-reference/inputs.conf">Splunk documentation</a>.
+
+7. Open up the Splunk web portal via the server IP and port `192.168.100.10:8000` and login using the credentials created [here](#splunk-credentials-anchor-point).
+
+8. In the Splunk web portal homepage, select `Settings` > `Indexes`.
+
+<img width="1024" height="852" alt="Splunk web portal home page" src="https://github.com/user-attachments/assets/3da12b29-6c6c-4a93-aae4-a3fb47ae305d" />
+
+9. The `inputs.conf` file indicates an index called `endpoint` which we have yet to create. Here we will create that index. Click `New Index`, name it `endpoint` and save. Leave everything as default.
+
+10. Next, we need to configure the Splunk server to receive the data. Select `Settings` > `Forwarding and receiving` > `Configure Receiving` > `New Receiving Port`. Input the listening port of `9997` and save.
+
+<img width="1022" height="852" alt="Listen on port 9997" src="https://github.com/user-attachments/assets/4ff410c6-6a39-4ba2-bc45-fd629f8e529c" />
+
+11. Now, if everything is setup correctly, we should start seeing data from the target machine. Verify by selecting `Apps` > `Search and Reporting` > `Skip` > `Skip Tour`. In the search bar, input `index=endpoint` and search.
+
+<img width="1022" height="851" alt="Splunk logs on index=endpoint" src="https://github.com/user-attachments/assets/d75b2013-fa0c-48b5-be09-4b6e2f741f7a" />
 
 #### Atomic Red Team
 
@@ -355,6 +427,7 @@ The Splunk Server acts as the central log aggregation and analysis platform for 
 
 <img width="1155" height="918" alt="Splunk server profile page" src="https://github.com/user-attachments/assets/ed5dee9b-2188-47b4-ae8d-a01b0ab26457" />
 
+<a href="splunk-credentials-anchor-point"></a>
 4. Fill out the profile page.
 
 5. Keep defaults and reboot the machine by clicking **Reboot Now**.
@@ -408,6 +481,7 @@ In the **Splunk** server machine:
 
 > **Note:** To stop pinging after running the `ping` command, press `Ctrl + C`.
 
+<a href="sign-up-for-splunk-anchor-point"></a>
 #### Sign up for Splunk
 
 In the Host machine:
@@ -416,7 +490,7 @@ In the Host machine:
 
 2. Press `Trials and Downloads`.
 
-3. Press `Get My Free Trial` for `Splunk Enterprise`.
+3. Press `Start Download` for `Splunk Enterprise`.
 
 4. Download the Linux .deb file.
 
@@ -484,6 +558,3 @@ In the Splunk server machine:
 
 #### Splunk Universal Forwarder
 
-
-
-#### Sysmon
