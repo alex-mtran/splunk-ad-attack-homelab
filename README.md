@@ -170,7 +170,7 @@ The NAT Network adapter enables internet connectivity and inter-VM communication
 
 Splunk universal forwarder is an agent designed to collect, monitor, and stream data in real-time to Splunk Enterprise or Cloud. It provides secure, reliable data forwarding with minimal resource consumption.
 
-1. In the Windows 10 machine, open up a browser to the <a href="www.splunk.com"> Splunk website</a> and login. If you haven't signed up yet, follow the sign up instructions listed [here](#sign-up-for-splunk-anchor-point).
+1. In the Windows 10 machine, open up a browser to the <a href="https://www.splunk.com/"> Splunk website</a> and login. If you haven't signed up yet, follow the sign up instructions listed [here](#sign-up-for-splunk-anchor-point).
 
 2. Press `Trials and Downloads`.
 
@@ -470,7 +470,7 @@ In the **Splunk** server machine:
 >5 tabs: `addresses` (under nameserver), `- to`<br>
 >6 tabs: `via`
 >
->[8.8.8.8] is the free, public DNS Google server. [192.168.100.1] is the default gateway of our Nat Network SplunkNetwork. Take a look at <a href="professormesser.com/network-plus/n10-006/ipv4-classes/">this video</a> to learn more about IP addresses.
+>[8.8.8.8] is the free, public DNS Google server. [192.168.100.1] is the default gateway of our Nat Network SplunkNetwork. Take a look at <a href="https://www.professormesser.com/network-plus/n10-006/ipv4-classes/">this video</a> to learn more about IP addresses.
 > 
 > When clicking into the Splunk machine window, the mouse will disappear. To make it reappear press `Right Alt`.
 
