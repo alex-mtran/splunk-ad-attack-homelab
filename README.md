@@ -491,6 +491,22 @@ The Active Directory Domain Controller (ADDC) is both the infrastructure backbon
 >
 > <img width="1021" height="851" alt="SPLUNK\Administrator" src="https://github.com/user-attachments/assets/9778ca7a-54dd-4d7b-aafc-25742432492a" />
 
+#### Add Organizational Units and Users
+
+1. Open up `Server Manager` > `Tools` > `Active Directory Users and Computers`.
+
+<img width="1021" height="852" alt="Active Directory Users and Computers" src="https://github.com/user-attachments/assets/2930b9aa-4a39-47e2-a638-8133327831e7" />
+
+2. Create a new `Organizational Unit` named `IT`. Right-click the domain `splunk.local` and click `New` > `Organizational Unit`.
+
+<img width="1020" height="848" alt="Create new organizational unit IT" src="https://github.com/user-attachments/assets/cc4f8be4-f04c-4810-8717-48917e65ebe2" />
+
+3. Create a new `User` under the `IT` organizational unit. Right-click the directory `IT` and click `New` > `User`.
+
+<img width="1021" height="849" alt="Create new user under IT" src="https://github.com/user-attachments/assets/813c4493-0cf1-40f9-95f4-c1963142e04c" />
+
+4. Create a new `Organizational Unit` named `HR` and create a new user under this organizational unit. Same instructions as steps 2-3.
+
 #
 
 <a name="splunk-server-anchor-point"></a>
