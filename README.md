@@ -59,17 +59,17 @@ The Windows 10 machine will serve as our target endpoint representing a typical 
 
 1. <a href="https://www.microsoft.com/en-ca/software-download/windows10">Download Windows 10 ISO</a>.
 
-2. Click **Download Now** to download the Media Creation Tool.
+2. Click `Download Now` to download the Media Creation Tool.
 
-3. Run the tool and select **Create installation media (USB flash drive, DVD, or ISO file)**.
+3. Run the tool and select `Create installation media (USB flash drive, DVD, or ISO file)`.
 
-4. Choose **ISO file** and save it to a known location.
+4. Choose `ISO file` and save it to a known location.
 
 #### Create Virtual Machine
 
-1. Open **Oracle VirtualBox Manager**.
+1. Open `Oracle VirtualBox Manager`.
 
-2. Click **New** to create a new virtual machine.
+2. Click `New` to create a new virtual machine.
 
 3. Fill in:
 
@@ -85,7 +85,7 @@ The Windows 10 machine will serve as our target endpoint representing a typical 
 
    <img width="781" alt="VM virtual hard disk settings" src="https://github.com/user-attachments/assets/5ecfd760-858b-4d9c-a273-1f3dcb4ed6af" />
 
-4. Click **Finish**
+4. Click `Finish`
 
 #### Install Windows 10
 
@@ -95,27 +95,27 @@ The Windows 10 machine will serve as our target endpoint representing a typical 
 
   <img width="957" height="857" alt="Windows setup" src="https://github.com/user-attachments/assets/eebf25d0-4bcd-4baa-a7c9-c167947ae030" />
 
-  * Click **Next** on the language/region selection screen
-  * Click **Install now**
-  * Select **I don't have a product key**
-  * Select **Windows 10 Pro** (required for domain joining)
-  * Check **I accept the license terms** and click **Next**
-  * Select **Custom: Install Windows only (advanced)**
-  * Select the unallocated disk space and click **Next**
+  * Click `Next` on the language/region selection screen
+  * Click `Install now`
+  * Select `I don't have a product key`
+  * Select `Windows 10 Pro` (required for domain joining)
+  * Check `I accept the license terms` and click `Next`
+  * Select `Custom: Install Windows only (advanced)`
+  * Select the unallocated disk space and click `Next`
 
 Windows will now install. This process takes 10-15 minutes and will reboot several times automatically. Once installation completes, Windows will boot to the desktop with your configured username. Your Windows 10 virtual machine is now up and running.
 
 #### Windows Setup
 
-1. Select **Set up for personal use** and Click **Next**.
+1. Select `Set up for personal use` and Click `Next`.
 
-2. Click **Offline Account**.
+2. Click `Offline Account`.
 
-3. Click **Limited Experience**.
+3. Click `Limited Experience`.
 
 4. Enter username and password.
 
-5. Click **Not now** or **Skip** for optional features until reaching the Windows homescreen.
+5. Click `Not now` or `Skip` for optional features until reaching the Windows homescreen.
 
 6. Change hostname to `target-PC`. Search `PC` in the search bar and click `Properties` > `Rename this PC`. Then restart machine. Go through the PC properties once more to verify that the hostname is now `target-PC`.
 
@@ -141,28 +141,28 @@ Windows will now install. This process takes 10-15 minutes and will reboot sever
 
 The NAT Network adapter enables internet connectivity and inter-VM communication. This network adapter must be enabled on all of the machines in the network.
 
-1. In **Oracle VirtualBox Manager**, navigate to **File > Tools > Network**.
+1. In `Oracle VirtualBox Manager`, navigate to `File` > `Tools` > `Network`.
 
 <img width="415" height="741" alt="Path to network tab" src="https://github.com/user-attachments/assets/bdc5f6d8-c06e-4691-93b6-c03a6ea86226" />
 
-2. Select **NAT Networks > Create**.
-   * Name the network to **SplunkNetwork**.
-   * Set IPv4 range to **192.168.100.0/24**.
-   * Click **Apply**.
+2. Select `NAT Networks` > `Create`.
+   * Name the network to `SplunkNetwork`.
+   * Set IPv4 range to `192.168.100.0/24`.
+   * Click `Apply`.
 
 <img width="924" height="746" alt="Create NAT Network" src="https://github.com/user-attachments/assets/f3ad2f4f-4cbf-4d7c-be0c-44e785826810" />
 
-3. Open **Settings** for the Windows 10 VM.
+3. Open `Settings` for the Windows 10 VM.
 
 <img width="927" height="740" alt="Open Windows 10 settings" src="https://github.com/user-attachments/assets/692c4133-7eb4-41d9-9a52-c26d4e1f8e14" />
 
-4. Navigate to **Network** and set **Attached to** to **NAT Network**.
+4. Navigate to `Network` and set `Attached to` to `NAT Network`.
 
-5. Select **SplunkNetwork** from the dropdown.
+5. Select `SplunkNetwork` from the dropdown.
 
 <img width="773" height="510" alt="Enable NAT Network for Windows 10 machine" src="https://github.com/user-attachments/assets/72eeac86-8061-4e4d-a396-4c11d0b87b14" />
 
-6. Click **OK**
+6. Click `OK`
 
 > **Note:** NAT Network allows multiple VMs to share the host's IP address for internet access while enabling VM-to-VM communication. This differs from a standard NAT adapter, which isolates VMs from each other. <a href="https://www.youtube.com/watch?v=Fhdxk4bmJCs">Learn more about VirtualBox network adapters</a>.
 
@@ -262,17 +262,17 @@ The Kali Linux machine will serve as our attacker, representing a threat actor w
 2. Extract the downloaded archive using <a href="https://www.7-zip.org/">7-zip</a>.
 <img width="587" height="387" alt="Extract Kali Linux folder with 7-zip" src="https://github.com/user-attachments/assets/a56655e5-a136-48fa-9f8c-38944a5fa281" />
 
-3. Open Kali Linux `.vbox` file using **Oracle VirtualBox** to import the machine.
+3. Open Kali Linux `.vbox` file using `Oracle VirtualBox` to import the machine.
 
 <img width="840" height="621" alt="Open Kali Linux .vbox file" src="https://github.com/user-attachments/assets/e11fa948-8552-46d7-aa44-44b1c0f5354d" />
 
 <img width="919" height="740" alt="Oracle VirtualBox" src="https://github.com/user-attachments/assets/70c5ae93-babe-4e0c-9538-c388c3ab055b" />
 
-4. Once imported, open **Settings** for the Kali Linux VM and navigate to the **Network** tab.
+4. Once imported, open `Settings` for the Kali Linux VM and navigate to the `Network` tab.
 
-5. Set **Attached to** to **NAT Network**, then select the **SplunkNetwork** from the dropdown.
+5. Set `Attached to` to `NAT Network`, then select the `SplunkNetwork` from the dropdown.
 
-6. Click **OK**.
+6. Click `OK`.
 
 <img width="773" height="514" alt="Enable NAT Network for Kali Linux machine" src="https://github.com/user-attachments/assets/33801a75-1b8a-44b1-a593-fe44a8bc9eda" />
 
@@ -282,23 +282,23 @@ Kali Linux does not allow changing hte username of the default user through stan
 
 1. Start the Kali Linux VM and sign in with the default credentials `kali`/`kali`.
 
-2. Open a terminal using **Ctrl + Alt + T** or click the Terminal icon in the top bar.
+2. Open a terminal using `Ctrl + Alt + T` or click the Terminal icon in the top bar.
 
 <img width="1278" height="883" alt="Open terminal" src="https://github.com/user-attachments/assets/ecec3baa-08a6-46ea-9ca1-f5c08b1087e8" />
 
-> **Note:** Kali Linux won't let you change the username of the default user account. We will switch to this **root** user to adjust the username of the root user.
+> **Note:** Kali Linux won't let you change the username of the default user account. We will switch to this `root` user to adjust the username of the root user.
 
 3. Switch to the root user and update the root password.
 
 <img width="1056" height="883" alt="Terminal sign into root user" src="https://github.com/user-attachments/assets/9aaaadd8-ca80-4671-aeaf-8b84e4a81db3" />
 
-4. Power off the machine and sign back in as **root**.
+4. Power off the machine and sign back in as `root`.
 
 5. Follow <a href="https://www.hexzilla.com/p/change-username-hostname-on-kali-linux-2025-update">this guide</a> to rename the default username.
 
 <img width="1078" height="956" alt="Change username" src="https://github.com/user-attachments/assets/0b74029b-49d5-47cf-9ea4-5d8e08c90190" />
 
-6. Power off the machine and sign back in as **attacker**.
+6. Power off the machine and sign back in as `attacker`.
 
 7. Set a new password.
 
@@ -315,15 +315,15 @@ ifconfig
 
 <img width="1078" height="949" alt="IP configuration" src="https://github.com/user-attachments/assets/a214ae06-953d-4125-8600-634c20965cad" />
 
-2. Right-click the network icon in the taskbar and select **Edit Connections...**
+2. Right-click the network icon in the taskbar and select `Edit Connections`
 
-3. Select **Wired connection 1** and click the settings icon to open its configuration.
+3. Select `Wired connection 1` and click the settings icon to open its configuration.
 
 <img width="1079" height="949" alt="Path visual to wired connection settings" src="https://github.com/user-attachments/assets/50e1f032-c788-4204-aee2-d242471def12" />
 
-4. Navigate to the **IPv4 Settings** tab and change the **Method** from **Automatic (DHCP)** to **Manual**.
+4. Navigate to the `IPv4 Settings` tab and change the `Method` from `Automatic (DHCP` to `Manual`.
 
-5. Click **Add** and enter the following values:
+5. Click `Add` and enter the following values:
 
 |  Field  |  Value  |
 |---------|-----|
@@ -331,9 +331,9 @@ ifconfig
 |  Netmask  |  `255.255.255.0`  |
 |  Gateway  |  `192.168.100.1`  |
 
-6. Click **Save**.
+6. Click `Save`.
 
-<img width="1079" height="948" alt="Add static IP address" src="https://github.com/user-attachments/assets/f1d09dda-6a0e-4986-9a9f-7134083bef92" />
+<img width="1079" height="948" alt="Set static IP address" src="https://github.com/user-attachments/assets/f1d09dda-6a0e-4986-9a9f-7134083bef92" />
 
 7. Reboot machine and verify the new IP address.
 
@@ -350,7 +350,7 @@ The Active Directory Domain Controller (ADDC) is both the infrastructure backbon
 
 1. Download the Windows Server image from the <a href="https://info.microsoft.com/ww-landing-windows-server-2022.html">official Windows Server website</a>.
 
-2. Open **Oracle VirtualBox** and click **New**
+2. Open `Oracle VirtualBox` and click `New`
 
 3. Fill in:
 
@@ -362,30 +362,44 @@ The Active Directory Domain Controller (ADDC) is both the infrastructure backbon
 
    <img width="779" height="556" alt="Windows Server 2022 Virtual Hardware" src="https://github.com/user-attachments/assets/e80c3ef1-11c6-4cf8-b648-fbdc5fda36b1" />
 
-4. Leave the rest as default and click **Finish**
+4. Leave the rest as default and click `Finish`.
 
 #### Configuring Windows Server 2022
 
-1. Start the **ADDC01** server machine.
+1. Start the `ADDC01` server machine.
 
-2. Click **Next** and **Install Now**.
+2. Click `Next` and `Install Now`.
 
-3. Select **Windows Server 2022 Standard Evaluation (Desktop Experience)** for the operating system.
+3. Select `Windows Server 2022 Standard Evaluation (Desktop Experience` for the operating system.
 
 <img width="1027" height="849" alt="Windows Server 2022 Operating System" src="https://github.com/user-attachments/assets/e87baee5-563a-4c9d-b78d-2d4460e22d7b" />
 
-4. Accept the terms and agreements and click **Next**.
+4. Accept the terms and agreements and click `Next`.
 
-5. Select **Custom: Install Microsoft Server Operating System only (advanced)** and click **Next**.
+5. Select `Custom: Install Microsoft Server Operating System only (advanced` and click `Next`.
 
 <img width="1030" height="849" alt="Windows Server 2022 Installation Type" src="https://github.com/user-attachments/assets/689497c2-0421-44f6-ad67-f54c4cb1764c" />
 
-6. Create a password and click **Finish**.
-> **Note:** To unlock via **Ctrl + Alt + Delete** on a virtual machine, click the **Input** button at the top bar and under the **Keyboard** dropbar there is a button for that key command.
+6. Create a password and click `Finish`.
+> **Note:** To unlock via `Ctrl + Alt + Delete` on a virtual machine, click the `Input` button at the top bar and under the `Keyboard` dropbar there is a button for that key command.
 > 
 > <img width="1021" height="850" alt="Ctrl + Alt + Delete on virtual machine" src="https://github.com/user-attachments/assets/a56dab30-e737-4551-a589-9a6ffac40953" />
 
 7. Change hostname to `ADDC01`. Search `settings: PC` in the search bar and click `View your PC name` > `Rename this PC`. Then restart machine. Go through the PC properties once more to verify that the hostname is now `ADDC01`.
+
+#### Configuring Static IP
+
+1. Right-click network icon in the bottom bar of the machine and select `Open Network & Internet settings`.
+
+2. Click `Change Adapter Options` > Right-click `Ethernet` > Click `Properties`.
+
+3. Select `Internet Protocol Version 4 (TCP/IPv4)` > `Properties`. Then, set static IP. Press `OK`.
+
+<img width="1021" height="854" alt="Set static IP" src="https://github.com/user-attachments/assets/7deaf4d9-1572-46ca-98b9-b630aad5df28" />
+
+4. Verify connectivity by running the command `ipconfig` in `cmd` to see the IP address. Then test to see that pinging google `google.com` and our splunk server `192.168.100.10` works properly.
+
+<img width="1020" height="850" alt="Verify connectivity" src="https://github.com/user-attachments/assets/62df2f70-49bd-400a-b1d3-5601ba9e15af" />
 
 #### Splunk Universal Forwarder
 
@@ -455,7 +469,27 @@ The Active Directory Domain Controller (ADDC) is both the infrastructure backbon
 
 #### Active Directory Domain Services
 
+1. Open up `Server Manager` > `Manage` > `Add Roles and Features` > `Next` > `Role-based or feature-based installation` > `Next` > `Next` > `Active Directory Domain Services` > `Add Features` > `Next` > `Next` > `Next` > `Install`.
 
+<img width="1021" height="854" alt="Path to Server Manager" src="https://github.com/user-attachments/assets/0ca6a5ac-56f3-4662-940a-ecc0e2c0d982" />
+
+<img width="1018" height="851" alt="Confirm AD installation settings" src="https://github.com/user-attachments/assets/9e077f71-df4b-4dea-83bc-cc058879527f" />
+
+2. Click the flag icon in the top bar of `Server Manager` and then click `Promote this server to a domain controller`.
+
+<img width="1023" height="852" alt="Promote server to a domain controller" src="https://github.com/user-attachments/assets/061767be-97fa-42e9-9424-3888940f168f" />
+
+3. Enable `Add a new forest` and create a root domain name > `Next`.
+
+<img width="1021" height="855" alt="Select deployment operation" src="https://github.com/user-attachments/assets/0a3cf74b-f856-4253-bafe-bbd4456aaa70" />
+
+>**Note:** Root domain name must have a top-level domain. For example, a root domain name of `splunk` would not work, but a root domain name of `splunk.local` would work.
+
+4. Leave everything default > Fill out the `Password` and `Confirm password` fields for the Directory Services Restore Mode (DSRM) > `Next` > `Next` > `Next` > `Next` > `Next` > `Install`.
+
+> **Note:** After the installation has finished, the machine will automatically restart. Upon logging back into the server, the domain will be shown with a back slash before the administrator account, which indicates that AD DS is running properly.
+>
+> <img width="1021" height="851" alt="SPLUNK\Administrator" src="https://github.com/user-attachments/assets/9778ca7a-54dd-4d7b-aafc-25742432492a" />
 
 #
 
@@ -468,7 +502,7 @@ The Splunk Server acts as the central log aggregation and analysis platform for 
 
 1. Download the Ubuntu Server 24.04.4 LTS image from the <a href="https://ubuntu.com/download/server">official Ubuntu server website</a>.
 
-2. Open **Oracle VirtualBox** and click **New**
+2. Open `Oracle VirtualBox` and click `New`
 
 3. Fill in:
 
@@ -484,13 +518,13 @@ The Splunk Server acts as the central log aggregation and analysis platform for 
 
    <img width="783" height="559" alt="Ubuntu Server 24.04.4 LTS virtual hard disk" src="https://github.com/user-attachments/assets/4c687748-cc28-4efb-bc95-ec73bdf87603" />
 
-4. Leave the rest as default and click **Finish**
+4. Leave the rest as default and click `Finish`
 
 #### Configuring Splunk Server
 
-1. Start the **Splunk** server machine.
+1. Start the `Splunk` server machine.
 
-2. Select **Try or Install Ubuntu Server** and hit **Enter** on the keyboard.
+2. Select `Try or Install Ubuntu Server` and hit `Enter` on the keyboard.
 
 3. Keep the defaults and continue until reaching the profile setup page.
 
@@ -500,9 +534,9 @@ The Splunk Server acts as the central log aggregation and analysis platform for 
 
 4. Fill out the profile page.
 
-5. Keep defaults and reboot the machine by clicking **Reboot Now**.
+5. Keep defaults and reboot the machine by clicking `Reboot Now`.
 
-6. Press **Enter** on the keyboard when prompted with the errors to continue with reboot.
+6. Press `Enter` on the keyboard when prompted with the errors to continue with reboot.
 
 7. Sign in after reboot finishes.
 > **Note:** Inputting keys into the password field will not output any visible characters to the screen. This is intentional. Fill out the password regardless.
@@ -513,7 +547,7 @@ The Splunk Server acts as the central log aggregation and analysis platform for 
 
 <img width="992" height="879" alt="Splunk update and upgrade repository commands" src="https://github.com/user-attachments/assets/d8b0127c-36dc-47fe-976d-1765d8465116" />
 
-9. Press **Enter** on the keyboard when the terminal finishes scanning for updates.
+9. Press `Enter` on the keyboard when the terminal finishes scanning for updates.
 
 > **Note:** Don't forget to add/change network adapter to NAT Network on all machines (Splunk, Windows 10 Splunk Forwarder, ADDC01, kali-linux-2025.4-virtualbox-amd64)!
 
@@ -521,7 +555,7 @@ The Splunk Server acts as the central log aggregation and analysis platform for 
 
 Because DHCP is set to enabled when we created the Nat Network, by default, each machine under the Nat Network (SplunkNetwork) will be given its own dynamic IP. For convenience and to always stay consistent with our project diagram, we will configure this machine to have a static IP of 192.168.100.10.
 
-In the **Splunk** server machine:
+In the `Splunk` server machine:
 
 1. Type the command `sudo nano /etc/netplan/` and tab complete to enter the machine's config.yaml file. Run this command.
 
