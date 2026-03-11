@@ -240,6 +240,34 @@ Sysmon (System Monitor) provides detailed, persistent telemetry (or logging) of 
 
 <img width="1022" height="851" alt="Splunk logs on index=endpoint" src="https://github.com/user-attachments/assets/d75b2013-fa0c-48b5-be09-4b6e2f741f7a" />
 
+#### Join to splunk.local domain
+
+**Note:** Complete ADDC01 server's [Add Users](#add-organizational-units-and-users) subsection before starting this subsection. We will authenticate using the IT user that we created.
+
+We need to allow this machine to resolve the `splunk.local` domain. To do so, we must change this machine's DNS to the `ADDC01` IP address.
+
+1. Click the `Network Adapter` button in the bottom task bar > `Change Network & Internet settings`.
+
+<img width="1023" height="854" alt="Change Network & Internet settings" src="https://github.com/user-attachments/assets/1bfc24a6-e745-40fa-8137-9f7900118640" />
+
+2. Select `Ethernet Adapter` > `Change adapter options` > select and right-click adapter > `Properties` > `Internet Protocol Version 4 (TCP/IPv4)` > `Properties`. Change preferred DNS server to ADDC01 IP address `192.168.100.10`.
+
+<img width="1023" height="852" alt="Change DNS server to active directory server IP" src="https://github.com/user-attachments/assets/9e01cbd1-8f74-48c6-a9f9-c3321c53111c" />
+
+3. Search `This PC` in the search bar and click `Properties`.
+
+4. Scroll down and click `Advanced system settings`.
+
+5. Click the `Computer Name` tab > `Change...` > enable `Domain: splunk.local` > `OK`.
+
+<img width="1025" height="852" alt="Change domain to splunk.local" src="https://github.com/user-attachments/assets/54cd99bf-b157-47ab-a4ed-88b99fce8b75" />
+
+6. Input administrator account to connect to the `splunk.local` domain. Press `OK` a few times and restart the computer.
+
+**Note:** In a real world environment, you would create users and put them into a custom group that is authorized to allow computers to join the domain.
+
+7. Once the login screen is shown, login with the account information of one of the newly created users. Click `Other user` in the bottom left corner of the screen and sign in as the user. Make note of the `Sign in to: SPLUNK` below the password bar.
+
 #### Atomic Red Team
 
 Atomic red team is a PowerShell-based execution framework built around the MITRE ATT&CK framework. It provides a library of simple tests that generate real, detectable malicious telemetry on the target machine.
