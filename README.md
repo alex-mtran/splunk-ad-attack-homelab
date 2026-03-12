@@ -53,6 +53,8 @@ Oracle VirtualBox is a free, open-source hypervisor that allows for running mult
 <a name="windows-10-anchor-point"></a>
 ### Windows 10
 
+#
+
 The Windows 10 machine will serve as our target endpoint representing a typical user workstation in an enterprise environment. This machine will be domain-joined, monitored by Sysmon, and forward logs to Splunk.
 
 #### Download Windows 10
@@ -216,7 +218,7 @@ Sysmon (System Monitor) provides detailed, persistent telemetry (or logging) of 
 
 <img width="1023" height="852" alt="inputs.conf" src="https://github.com/user-attachments/assets/8781f024-76ee-4d68-ba3c-ab3336acb617" />
 
->**Note:** You can also copy + paste the contents of `windows10-inputs.conf` file in this project repository over into this file instead of manually typing this out. Make sure to edit the `inputs.conf` file from the `local` directory and not the `default` directory.
+> **Note:** You can also copy + paste the contents of `windows10-inputs.conf` file in this project repository over into this file instead of manually typing this out. Make sure to edit the `inputs.conf` file from the `local` directory and not the `default` directory.
 >
 > Further note, anytime the `inputs.conf` file is updated, the Splunk Universal Forwarder service must be restarted. Run `Services` as administrator (in the search bar in the bottom task bar) and look for `SplunkForwarder` services to restart. Also check its properties and go to the `Log On` tab and set it to log on as `Local System account`. If SplunkForwarder is ran as account NT Service, this might not allow all of the logs to be collected due to its permissions.
 >
@@ -242,7 +244,7 @@ Sysmon (System Monitor) provides detailed, persistent telemetry (or logging) of 
 
 #### Join to splunk.local domain
 
-**Note:** Complete ADDC01 server's [Add Users](#add-organizational-units-and-users) subsection before starting this subsection. We will authenticate using the IT user that we created.
+> **Note:** Complete ADDC01 server's [Add Users](#add-organizational-units-and-users) subsection before starting this subsection. We will authenticate using the IT user that we created.
 
 We need to allow this machine to resolve the `splunk.local` domain. To do so, we must change this machine's DNS to the `ADDC01` IP address.
 
@@ -264,7 +266,7 @@ We need to allow this machine to resolve the `splunk.local` domain. To do so, we
 
 6. Input administrator account to connect to the `splunk.local` domain. Press `OK` a few times and restart the computer.
 
-**Note:** In a real world environment, you would create users and put them into a custom group that is authorized to allow computers to join the domain.
+> **Note:** In a real world environment, you would create users and put them into a custom group that is authorized to allow computers to join the domain.
 
 7. Once the login screen is shown, login with the account information of one of the newly created users. Click `Other user` in the bottom left corner of the screen and sign in as the user. Make note of the `Sign in to: SPLUNK` below the password bar.
 
@@ -276,6 +278,8 @@ Atomic red team is a PowerShell-based execution framework built around the MITRE
 
 <a name="kali-linux-anchor-point"></a>
 ### Kali Linux
+
+#
 
 The Kali Linux machine will serve as our attacker, representing a threat actor within the security environment. This machine will generate malicious telemetry to the Active Directory domain and target Windows machine that we can detect and analyze in Splunk.
 
@@ -358,19 +362,60 @@ ifconfig
 |  Address  |  `192.168.100.200`  |
 |  Netmask  |  `255.255.255.0`  |
 |  Gateway  |  `192.168.100.1`  |
+|  DNS   |  `8.8.8.8`   |
 
 6. Click `Save`.
 
-<img width="1079" height="948" alt="Set static IP address" src="https://github.com/user-attachments/assets/f1d09dda-6a0e-4986-9a9f-7134083bef92" />
+<img width="1077" height="945" alt="Set static IP address" src="https://github.com/user-attachments/assets/6c5b9f27-c2fe-4a8d-8551-d7cd0bf33bb1" />
 
 7. Reboot machine and verify the new IP address.
 
 <img width="1078" height="947" alt="Verify changed IP address" src="https://github.com/user-attachments/assets/6a1d3609-618c-476f-87d1-9abaa2952215" />
 
+#### Brute Force Attack
+
+A brute force attack seeks to guess login credentials (usernames/passwords), encryption keys, or hidden web pages by systematically attempting all possible combinations through automated tools. We will be using the brute-forcing tool `Crowbar` to perform the brute-force attack.
+
+1. Create a project directory called `ad-project` in the `Desktop` directory and install `Crowbar`.
+
+<img width="1076" height="924" alt="Make ad-project directory and install crowbar commands" src="https://github.com/user-attachments/assets/d63ae8d7-8015-4d64-b2b4-cb7514dc65d3" />
+
+> **Note:** Make sure to run the command `sudo apt-get update && sudo apt-get upgrade -y` before running these commands.
+
+2. Unzip and move the massive, widely-used password dictionary file `rockyou.txt` to our created `ad-project` directory.
+
+<img width="1077" height="924" alt="Move rockyou.txt file to ad-project directory" src="https://github.com/user-attachments/assets/f5070c95-a4f3-488c-b67b-1a17ff9b5394" />
+
+3. Create a `passwords.txt` file that contains the first 20 lines of the `rockyou.txt` file.
+
+<img width="1077" height="924" alt="Create passwords.txt containing the first 20 lines of rockyou.txt" src="https://github.com/user-attachments/assets/6caf8014-40ac-4f78-8c23-bd3668c48dda" />
+
+4. Write in the password you used for one of the previously created active directory users. Run the command `cat passwords.txt` then move to the bottom of the text file and on a new line write in the password.
+
+> **Note:** Save and exit textfile editor with `Ctrl + X` > `Y` > `Enter`.
+
+5. In the target-PC, sign in and search `PC` in the search bar. Then click `Properties` > `Advanced system settings` > sign in as administrator > `Remote` tab > enable `Allow remote connections to this computer` > `Select Users...` > Add both created users > `OK` > `Apply`.
+
+<img width="1024" height="852" alt="Allow remote connections to target-PC" src="https://github.com/user-attachments/assets/8ec6970b-7162-4dde-b554-743c5c574274" />
+
+6. Back in the Kali Linux machine, run `crowbar` using rdp, on a specified user that we created previously (i.e., `jdoe`), using passwords from the `passwords.txt` file we created, on the singular ip address of the target-PC `192.168.100.3/32`.
+
+<img width="1080" height="924" alt="Use crowbar, if fail, use hydra" src="https://github.com/user-attachments/assets/25c49a58-651d-4ffd-a053-218ff6ce3937" />
+
+> **Note:** `crowbar` can be finicky. If after diagnosing that all of the fields and their information are all correct and it still not working, try `hydra` using the command shown below the `crowbar` command.
+
+7. After receiving a success return, head to splunk server and check the logs via `Search and Reporting`. Narrow down the field by searching for `jdoe` and by setting the time frame to be the last 15 minutes.
+
+<img width="1025" height="852" alt="Check splunk logs for jdoe" src="https://github.com/user-attachments/assets/ee5950d1-c63e-4161-8eb9-55899c7c9a2c" />
+
+8. Scroll down and on the left bar click `EventCode`. Select for event code 4625 (an account failed to log on) to filter the query further for logs with EventCode=4625. This will reveal all failed attempts to logon. Notice the timestamp for these logs and how they are very close together, this is a clear indication of brute force attacks.
+
 #
 
 <a name="active-directory-domain-controller-anchor-point"></a>
 ### Active Directory Domain Controller
+
+#
 
 The Active Directory Domain Controller (ADDC) is both the infrastructure backbone and the system we're monitoring for signs of compromise. The DC handles standard administrative functions such as authentication requests, group policies, and replication while also generating the logs that Splunk collects to enable attack detection and analysis. We will deploy the Active Directory Domain Services on a Windows Server 2022.
 
@@ -479,7 +524,7 @@ The Active Directory Domain Controller (ADDC) is both the infrastructure backbon
 
 <img width="1023" height="865" alt="inputs.conf" src="https://github.com/user-attachments/assets/d6236d46-172b-44b9-a42e-4235d947d991" />
 
->**Note:** You can also copy + paste the contents of `addc01-inputs.conf` file in this project repository over into this file instead of manually typing this out. Make sure to edit the `inputs.conf` file from the `local` directory and not the `default` directory.
+> **Note:** You can also copy + paste the contents of `addc01-inputs.conf` file in this project repository over into this file instead of manually typing this out. Make sure to edit the `inputs.conf` file from the `local` directory and not the `default` directory.
 >
 > Further note, anytime the `inputs.conf` file is updated, the Splunk Universal Forwarder service must be restarted. Run `Services` as administrator (in the search bar in the bottom task bar) and look for `SplunkForwarder` services to restart. Also check its properties and go to the `Log On` tab and set it to log on as `Local System account`. If SplunkForwarder is ran as account NT Service, this might not allow all of the logs to be collected due to its permissions.
 >
@@ -511,7 +556,7 @@ The Active Directory Domain Controller (ADDC) is both the infrastructure backbon
 
 <img width="1021" height="855" alt="Select deployment operation" src="https://github.com/user-attachments/assets/0a3cf74b-f856-4253-bafe-bbd4456aaa70" />
 
->**Note:** Root domain name must have a top-level domain. For example, a root domain name of `splunk` would not work, but a root domain name of `splunk.local` would work.
+> **Note:** Root domain name must have a top-level domain. For example, a root domain name of `splunk` would not work, but a root domain name of `splunk.local` would work.
 
 4. Leave everything default > Fill out the `Password` and `Confirm password` fields for the Directory Services Restore Mode (DSRM) > `Next` > `Next` > `Next` > `Next` > `Next` > `Install`.
 
@@ -539,6 +584,8 @@ The Active Directory Domain Controller (ADDC) is both the infrastructure backbon
 
 <a name="splunk-server-anchor-point"></a>
 ### Splunk Server
+
+#
 
 The Splunk Server acts as the central log aggregation and analysis platform for this lab environment. It ingests and indexes Windows Event Logs forwarded from the Domain Controller and other endpoints via the Splunk Universal Forwarder for us to search, correlate, and visualize security events. We will deploy the Splunk Server on an Ubuntu Server 24.04. 
 
