@@ -11,17 +11,21 @@ This project demonstrates:
 
 ## Table of Contents 
 1. [Initial Setup](#initial-setup-anchor-point)
-   * [Windows 10](#windows-10-anchor-point)
-   * [Kali Linux](#kali-linux-anchor-point)
-   * [Active Directory Domain Controller](#active-directory-domain-controller-anchor-point)
-   * [Splunk Server](#splunk-server-anchor-point)
+
+2. [Windows 10](#windows-10-anchor-point)
+
+3. [Kali Linux](#kali-linux-anchor-point)
+
+4. [Active Directory Domain Controller](#active-directory-domain-controller-anchor-point)
+
+5. [Splunk Server](#splunk-server-anchor-point)
 
 ---
 
 <a name="initial-setup-anchor-point"></a>
-## Initial Setup
+### Initial Setup
 
-### Lab Architecture
+#### Lab Architecture
 
 Host Machine: Windows 11 Home <br> 
 Virtual Machine Manager: Oracle VirtualBox <br> 
@@ -273,6 +277,43 @@ We need to allow this machine to resolve the `splunk.local` domain. To do so, we
 #### Atomic Red Team
 
 Atomic red team is a PowerShell-based execution framework built around the MITRE ATT&CK framework. It provides a library of simple tests that generate real, detectable malicious telemetry on the target machine.
+
+1. Open up `PowerShell` as administrator.
+
+2. Run command to allow current user to bypass execution policy.
+
+<img width="1023" height="850" alt="Run PowerShell command to bypass execution policy for current user" src="https://github.com/user-attachments/assets/293d76b6-2c16-45ce-b5d8-5dae956702e6" />
+
+3. Set an exclusion for the entire `C:/` drive because `Microsoft Defender` will detect and remove some of the files from Atomic Red Team. Click the up arrow on the bottom task bar > Windows Security icon > `Virus & threat protection` > `Manage settings` under Virus & threat protection services subsection > `Add or remove exclusions` under Exclusions subsection > `Add an exclusion` > `Select Folder` > select `C:/` drive.
+
+<img width="1022" height="849" alt="Windows Security" src="https://github.com/user-attachments/assets/1f80f749-9fc9-4932-bb23-3cbede413d46" />
+
+<img width="1017" height="850" alt="Add C:/ drive to exclusion list in Windows Security" src="https://github.com/user-attachments/assets/86b1b82a-f393-424e-bcb5-056b29186e9f" />
+
+4. Install atomic red team using the following commands `IEX (IWR 'https://raw.githubusercontent.com/redcanaryco/invoke-atomicredteam/master/install-atomicredteam.ps1' -UseBasicParsing);`
+`Install-AtomicRedTeam -getAtomics`.
+
+<img width="1018" height="852" alt="Install Atomic Red Team PowerShell command" src="https://github.com/user-attachments/assets/ebe67b4c-e778-49af-8072-a4cc1b187ab7" />
+
+5. Open `File Explorer` > `This PC` > `Local Disk (C:)` > `AtomicRedTeam` > `atomics`. These technique IDs map to the <a href="https://attack.mitre.org/">MITRE ATT&CK framework</a>.
+
+> **Example:** Here we will use the persistence att&ck `Create Account` as an example. As shown in the image below, it is referred to as `T1136`. As such, we will scroll through the `atomics` folder for a `T1136` folder. In this example, we will use the `T1136.001` (`Create Local Account`).
+> 
+> <img width="875" height="957" alt="MITRE ATT&CK framework" src="https://github.com/user-attachments/assets/914f1da3-2d86-4d28-8d06-56ebdde26bd8" />
+>
+> Instead of just one `T1136` folder, there are three folders `T1136.001`, `T1136.002`, `T1136.003`. These folders correspond to each of the subtechniques of `Create Account` attacks.
+>
+> <img width="1022" height="854" alt="Atomics folder" src="https://github.com/user-attachments/assets/431dc87f-5d2a-4cb9-8e9a-6715b3eb5ce5" />
+
+6. In PowerShell, run the command `Invoke-AtomicTest T1136.001` to run the `T1136.001` atomic test.
+
+<img width="1019" height="849" alt="Run AtomicRedTeam T1136.001" src="https://github.com/user-attachments/assets/abeffe91-4fd6-491e-bcaa-44f8d6860de8" />
+
+7. Check Splunk server for `NewLocalUser`.
+
+<img width="1022" height="851" alt="Create NewLocalUser user Splunk log" src="https://github.com/user-attachments/assets/2922b4b4-809d-45a3-b6dd-d535a245153d" />
+
+> **Note:** Splunk may take awhile to get the log to register. If even after awhile there still is no Splunk log generated for the attack, that shows a gap in visibility that needs to be addressed.
 
 #
 
