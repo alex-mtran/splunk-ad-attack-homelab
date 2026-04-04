@@ -1,5 +1,5 @@
-# Splunk Active Directory Attack Homelab (IN PROGRESS)
-Home lab for practicing Active Directory security monitoring and attack detection using Splunk SIEM. Built with Oracle VirtualBox VMs for log ingestion and analysis. The server versions are the latest as of the creation of this project.
+# Splunk Active Directory Attack Homelab
+Home lab for Active Directory security monitoring and attack detection using Splunk SIEM. Built with Oracle VirtualBox VMs for log ingestion and analysis. The server versions are the latest as of the creation of this project.
 
 This project demonstrates:
 - Active Directory security monitoring and log analysis
